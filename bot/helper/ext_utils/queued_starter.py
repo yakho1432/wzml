@@ -2,7 +2,6 @@ from threading import Thread
 
 from bot import config_dict, queued_dl, queued_up, non_queued_up, non_queued_dl, queue_dict_lock
 from bot.helper.mirror_utils.download_utils.gd_downloader import add_gd_download
-from bot.helper.mirror_utils.download_utils.mega_downloader import add_mega_download
 from bot.helper.mirror_utils.download_utils.telegram_downloader import TelegramDownloadHelper
 from bot.helper.mirror_utils.download_utils.yt_dlp_download_helper import YoutubeDLHelper
 
@@ -10,8 +9,6 @@ def start_dl_from_queued(uid):
     dl = queued_dl[uid]
     if dl[0] == 'gd':
         Thread(target=add_gd_download, args=(dl[1], dl[2], dl[3], dl[4], dl[5], dl[6], dl[7], dl[8], dl[9], dl[10], True)).start()
-    elif dl[0] == 'mega':
-        Thread(target=add_mega_download, args=(dl[1], dl[2], dl[3], dl[4], True)).start()
     elif dl[0] == 'yt':
         ydl = YoutubeDLHelper(dl[7])
         Thread(target=ydl.add_download, args=(dl[1], dl[2], dl[3], dl[4], dl[5], dl[6], True)).start()

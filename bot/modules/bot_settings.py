@@ -674,12 +674,13 @@ def load_config():
         YT_DLP_QUALITY = ''
 
     BASE_URL = environ.get('BASE_URL', '').rstrip("/")
+    PORT = environ.get('PORT')
     if len(BASE_URL) == 0:
         BASE_URL = ''
         srun(["pkill", "-9", "-f", "gunicorn"])
     else:
         srun(["pkill", "-9", "-f", "gunicorn"])
-        Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{SERVER_PORT}", shell=True)
+        Popen(f"gunicorn web.wserver:app --bind 0.0.0.0:{PORT}", shell=True)
 
     config_dict.update({'AS_DOCUMENT': AS_DOCUMENT,
                         'AUTHORIZED_CHATS': AUTHORIZED_CHATS,

@@ -9,6 +9,8 @@ RUN apt -qq update --fix-missing && \
 
 COPY . .
 RUN pip3 install --no-cache-dir -r requirements.txt
-RUN apt-get update && apt-get upgrade -y
+RUN playwright install chromium
+RUN playwright install-deps
+RUN apt-get update && apt-get upgrade -y && apt-get install -y qbittorrent-nox && apt purge --autoremove -y aria2 && apt-get install -y aria2
 
 CMD ["bash", "start.sh"]
